@@ -1,0 +1,32 @@
+services:
+  car-booking:
+    build: 
+    context: .
+    dockerfile: Dockerfile
+    ports:
+      - 5005:5005
+    working_dir: /car-booking
+    volumes:
+      - ./:/car-booking
+    environment:
+      MONGO_URI: 
+      AWS_BUCKET_NAME: cnm1
+      AWS_BUCKET_REGION: ap-southeast-1
+      AWS_ACCESS_KEY: AKIAZXHWI7BBAMDNUKVB
+      AWS_SECRET_KEY: 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
+      ZALO_PAY_APP_ID: 2553
+      ZALO_PAY_KEY_1: PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL
+      ZALO_PAY_KEY_2: kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz
+      ZALO_PAY_ENDPOINT: https://sb-openapi.zalopay.vn/v2/create
+      ZALO_PAY_ENDPOINT_QUERY: https://sb-openapi.zalopay.vn/v2/query
+     
+  mongo:
+    image: mongo
+    volumes:
+      - car-booking:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 111111
+
+volumes:
+  car-booking:
